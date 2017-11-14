@@ -2,16 +2,7 @@
 
 @section('content')
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bienvenido</title>
-    <link href="/favicon.ico" rel="shortcut icon">
-    <!-- link all the styles -->
-    <link rel="stylesheet" href="../css/uikit.min.css" />
-    <!-- link all the scripts -->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/uikit.min.js"></script>
   </head>
   <body>
     <div class="container" >
@@ -20,8 +11,14 @@
           <h1 class="uk-h1 uk-text-center">Bienvenido
             @guest
               Invitado <br>@include('links')
+              <?php
+              $id=0;
+              ?>
             @else
               {{ Auth::user()->name }}
+              <?php
+              $id=Auth::user()->id;
+              ?>
               <br>@include('links')<br><br>
               <pre>Su ID es {{ Auth::user()->id }}, Su Correo es {{ Auth::user()->email }}</pre>
             @endguest
@@ -38,28 +35,27 @@
             <a href="../index.php">Cerrar sesión</a-->
             <div class="uk-overflow-auto">
               <table class="table">
+                @if(count($publicado) > 0)
                 <thead>
                   <tr>
-                    <th>Id Publicacion</th>
-                    <th>Descripción</th>
-                    <th>Link</th>
-                    <th>Votos</th>
-                    <th>Comentarios</th>
-                    <th>Estado</th>
+                    <th>Publicación</th><th>Usuario</th><th>Votos</th><th>Comentarios</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if(count($publicado) > 0)
                    @foreach($publicado->all() as $publicacion)
                   <tr>
-                    <td>{{ $publicacion->id_publicacion  }}</td>
-                    <td>{{ $publicacion->descripcion  }}</td>
-                    <td>{{ $publicacion->link  }}</td>
-                    <td>{{ $publicacion->votos  }}</td>
-                    <td>{{ $publicacion->comentarios }}</td>
-                    <td>{{ $publicacion->estado  }}</td>
+                    <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->descripcion  }} </a></td>
+                    <td>{{$publicacion->name}}</td>
+                    <td><a class='uk-icon-hover uk-icon-thumbs-o-up' href=''/>{{$publicacion->votos}}</td>
+                    <td><a class='uk-icon-hover uk-icon-comments-o' href=''/>{{$publicacion->comentarios}}</td></tr>
                   </tr>
                   @endforeach
+                  @else
+                    @guest
+                    <h2>Esta muy solo por aquí, <a href="{{url('register')}}">registrese</a> para contribuir con el contenido.</h2>
+                    @else
+                    <h2>Aún no existen publicaciones. :'( </h2>
+                    @endguest
                   @endif
                 </tbody>
 

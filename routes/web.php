@@ -32,5 +32,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'Control@home')->name('home');
 Route::get('/', 'Control@home')->name('home');
 
-//Route::post('/CrearPublicacion', 'Control@CrearPublicacion');
-Route::post('/CrearPublicacion/{{ Auth::user()->id }}', 'Control@PublicacionUsuario');
+Route::post('/CrearPublicacion', 'Control@CrearPublicacion');
+Route::get('/mis_publicaciones', 'Control@ConsutarMisPublicaciones');
+Route::get('/CambiarEstado/{estado}/{id_publicacion}', 'Control@CambiarEstado');
