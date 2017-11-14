@@ -19,26 +19,19 @@
         <br>
           <h1 class="uk-h1 uk-text-center">Bienvenido
             @guest
-                Invitado
+              Invitado <br>@include('links')
             @else
-            {{ Auth::user()->name }}
-            <p>
-            Su ID es {{ Auth::user()->id }}, Su Correo es {{ Auth::user()->email }}
-            </p>
+              {{ Auth::user()->name }}
+              <br>@include('links')<br><br>
+              <pre>Su ID es {{ Auth::user()->id }}, Su Correo es {{ Auth::user()->email }}</pre>
             @endguest
           </h1>
-          <?php
-          $this->CrearPublicacion="<a href='../vista/crear_publicacion.php' class='uk-button uk-button-primary uk-button-large'>Crear Publicación</a>";
-          $this->MisPublicaciones="<a href='../vista/mis_publicaciones.php' class='uk-button uk-button-success uk-button-large'>Mis Publicaciones</a>";
-          $this->MiPerfil="<a href='../vista/editar_perfil.php' class='uk-button uk-button uk-button-large'>Mi Perfil</a>";
-          ?>
+
+@if(session('info'))
+<div class="alert alert-success">{{session('info')}}</div>
+@endif
             <hr class='uk-grid-divider'>
             <div class="uk-grid-divider uk-grid-margin uk-text-center">
-              <?php
-              echo $this->CrearPublicacion ." ";
-              echo $this->MisPublicaciones ." ";
-              echo $this->MiPerfil ." ";
-              ?>
            </div>
             <hr class='uk-grid-divider'>
             <!--a href="crear_publicacion.php">Publicar</a><br>
@@ -56,7 +49,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @if(count($publicado) > 0 )
+                  @if(count($publicado) > 0)
                    @foreach($publicado->all() as $publicacion)
                   <tr>
                     <td>{{ $publicacion->id_publicacion  }}</td>

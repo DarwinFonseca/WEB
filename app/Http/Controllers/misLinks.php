@@ -3,6 +3,8 @@
 class Links{
 
   private $CrearPublicacion;
+  private $MisPublicaciones;
+  private $MiPerfil;
   private $CerrarSesion;
   private $IniciarSesion;
 
@@ -17,15 +19,6 @@ function Links(){
 }
 
 function MostrarLinks(){
-
-  @guest
-      Invitado
-  @else
-  {{ Auth::user()->name }}
-  <p>
-  Su ID es {{ Auth::user()->id }}, Su Correo es {{ Auth::user()->email }}
-  </p>
-  @endguest
 
 if (isset($_SESSION['id_user'])) {
     if ($_SESSION['id_user']=='0') {

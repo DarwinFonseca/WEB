@@ -10,13 +10,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    //return view('welcome');
     return view('home');
+});
+
+Route::get('/crear_publicacion', function () {
+    return view('crear_publicacion');
+});
+
+Route::get('/mis_publicaciones', function () {
+    return view('mis_publicaciones');
+});
+
+Route::get('/editar_perfil', function () {
+    return view('editar_perfil');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'Control@home')->name('home');
+Route::get('/', 'Control@home')->name('home');
+
+//Route::post('/CrearPublicacion', 'Control@CrearPublicacion');
+Route::post('/CrearPublicacion/{{ Auth::user()->id }}', 'Control@PublicacionUsuario');
