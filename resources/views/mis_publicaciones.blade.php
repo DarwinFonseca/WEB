@@ -1,14 +1,9 @@
 @extends('layouts.app')
 
 @guest
-//Redireccionado al index<?php
-$id=0;
-?>
+//Redireccionado al index
 @else
 @endguest
-<?php
-$id=Auth::user()->id;
-?>
 @section('content')
 
   <head>

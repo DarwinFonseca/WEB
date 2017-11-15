@@ -13,5 +13,6 @@ class comentarios extends Model
      * @var array
      */
     protected $fillable = [
-        'comentario',
+        'id_user','id_publicacion','comentario',
+      ];
 }

@@ -7,26 +7,22 @@
   <body>
     <div class="container" >
       <div class="uk-container uk-align-center">
-        <br>
           <h1 class="uk-h1 uk-text-center">Bienvenido
             @guest
               Invitado <br>@include('links')
-              <?php
-              $id=0;
-              ?>
             @else
               {{ Auth::user()->name }}
-              <?php
-              $id=Auth::user()->id;
-              ?>
               <br>@include('links')<br><br>
               <pre>Su ID es {{ Auth::user()->id }}, Su Correo es {{ Auth::user()->email }}</pre>
             @endguest
           </h1>
 
-@if(session('info'))
-<div class="alert alert-success">{{session('info')}}</div>
-@endif
+          @if(session('info'))
+          <div class="alert alert-success">{{session('info')}}</div>
+          @endif
+          @if(session('infoRed'))
+          <div class="alert alert-danger">{{session('infoRed')}}</div>
+          @endif
             <hr class='uk-grid-divider'>
             <div class="uk-grid-divider uk-grid-margin uk-text-center">
            </div>
@@ -47,7 +43,7 @@
                     <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->descripcion  }} </a></td>
                     <td>{{$publicacion->name}}</td>
                     <td><a class='uk-icon-hover uk-icon-thumbs-o-up' href='{{url("/ValidarVoto/{$publicacion->id_publicacion}")}}'/>{{$publicacion->votos}}</td>
-                    <td><a class='uk-icon-hover uk-icon-comments-o' href=''/>{{$publicacion->comentarios}}</td></tr>
+                    <td><a class='uk-icon-hover uk-icon-comments-o' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/>{{$publicacion->comentarios}}</td></tr>
                   </tr>
                   @endforeach
                   @else
