@@ -27,6 +27,9 @@ $id=Auth::user()->id;
             <a href="../index.php">Cerrar sesión</a-->
             <div class="uk-overflow-auto">
 
+              @if(session('info'))
+              <div class="alert alert-success">{{session('info')}}</div>
+              @endif
 
               <table class="table">
                 @if(count($MisPubs) > 0)
@@ -49,6 +52,7 @@ $id=Auth::user()->id;
                     <td>{{ $publicacion->votos  }}</td>
                     <td><a class='uk-icon-hover uk-icon-comments-o' {{ $publicacion->id_publicacion  }}>{{ $publicacion->comentarios }}</a></td>
                     <td><a href='{{url("/CambiarEstado/{$publicacion->estado}/{$publicacion->id_publicacion}")}}'>{{ $publicacion->estado  }}</a></td>
+                    <td><a href='{{url("/EliminarPublicacion/{$publicacion->id_publicacion}")}}' class='label label-danger'>Eliminar</a></td>
                   </tr>
                   @endforeach
                   @else

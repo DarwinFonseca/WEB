@@ -46,7 +46,7 @@
                   <tr>
                     <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->descripcion  }} </a></td>
                     <td>{{$publicacion->name}}</td>
-                    <td><a class='uk-icon-hover uk-icon-thumbs-o-up' href=''/>{{$publicacion->votos}}</td>
+                    <td><a class='uk-icon-hover uk-icon-thumbs-o-up' href='{{url("/ValidarVoto/{$publicacion->id_publicacion}")}}'/>{{$publicacion->votos}}</td>
                     <td><a class='uk-icon-hover uk-icon-comments-o' href=''/>{{$publicacion->comentarios}}</td></tr>
                   </tr>
                   @endforeach
