@@ -10,7 +10,7 @@
     <h1 class="uk-text-center">Comentar en la publicación</h1>
       <div class="uk-overflow-auto">
 
-        <a href="{{URL('home')}}"><button value="Volver" class="uk-grid-width-1-2 uk-button uk-button-danger uk-button-large">Volver</button></a></p>
+        <a href="{{URL('home')}}"><button value="Volver" class="btn">Volver</button></a></p>
         <hr class='uk-grid-divider'>
         <div class="uk-overflow-auto">
           <table class="table">
@@ -25,8 +25,8 @@
               <tr>
                 <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->descripcion  }} </a></td>
                 <td>{{$publicacion->name}}</td>
-                <td><a class='uk-icon-hover uk-icon-thumbs-o-up' href='{{url("/ValidarVoto/{$publicacion->id_publicacion}")}}'/>{{$publicacion->votos}}</td>
-                <td><a class='uk-icon-hover uk-icon-comments-o' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/>{{$publicacion->comentarios}}</td></tr>
+                <td><a class='glyphicon glyphicon-thumbs-up' href='{{url("/ValidarVoto/{$publicacion->id_publicacion}")}}'/> {{$publicacion->votos}}</td>
+                <td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td>
               </tr>
               @endforeach
               @else

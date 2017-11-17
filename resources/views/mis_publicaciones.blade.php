@@ -12,11 +12,10 @@
   <body>
     <div class="container" >
       <div class="uk-container uk-align-center">
-        <br>
+        <a href="{{URL('home')}}"><button value="Volver" class="btn">Volver</button></a></p>
+        <hr class='uk-grid-divider'>
           <h1 class="uk-h1 uk-text-center">Bienvenido {{Auth::user()->name}}</h1>
-            <hr class='uk-grid-divider'>
             <div class="uk-grid-divider uk-grid-margin uk-text-center">
-              <br><br><a href="{{URL('home')}}"><button value="Volver" class="uk-grid-width-1-2 uk-button uk-button-danger uk-button-large">Volver</button></a></p>
           </div><hr class='uk-grid-divider'>
             <!--a href="crear_publicacion.php">Publicar</a><br>
             <a href="../index.php">Cerrar sesión</a-->
@@ -44,8 +43,8 @@
                     <td>{{ $publicacion->id_publicacion  }}</td>
                     <td>{{ $publicacion->descripcion  }}</td>
                     <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->link  }}</a></td>
-                    <td>{{ $publicacion->votos  }}</td>
-                    <td><a class='uk-icon-hover uk-icon-comments-o' {{ $publicacion->id_publicacion  }}>{{ $publicacion->comentarios }}</a></td>
+                    <td><a class='glyphicon glyphicon-thumbs-up' /> {{$publicacion->votos}}</td>
+                    <td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td>
                     <td><a href='{{url("/CambiarEstado/{$publicacion->estado}/{$publicacion->id_publicacion}")}}'>{{ $publicacion->estado  }}</a></td>
                     <td><a href='{{url("/EliminarPublicacion/{$publicacion->id_publicacion}")}}' class='label label-danger'>Eliminar</a></td>
                   </tr>

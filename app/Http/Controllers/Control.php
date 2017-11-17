@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 use Auth;
 use App\votos;
 use App\comentarios;
 use App\publicaciones;
 use App\publicacionesxusuario;
+
 
 class Control extends Controller
 {
@@ -239,17 +242,22 @@ class Control extends Controller
       $SumarValor=$Valor->comentarios+1;
       //return "el numero de votos en la publicacion # ".$id_publicacion." es de: ".$valor->comentarios. " El valor total es: ".$Sumarvalor;
       $query = DB::update('update publicaciones set comentarios='.$SumarValor.' where id_publicacion='.$id_publicacion);
-
     }
 
-    public function MostrarComentarios($id_publicacion){
+    public function ActualizarUser(Request $request){
 
-
-      $result = mysql_query($query);
-
-        
+      if ($request->password==$request->password_confirmation) {
+        $validatedData = $request->validate([
+        'email' => 'unique',
+        'password' => 'required|min:6',
+        'password_confirmation' => 'required',
+      ]);
+              DB::table('users')
+              ->where('id', Auth::user()->id)
+              ->update(['name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password)]);
+            return redirect('/ActualizarUser')->with('info','Datos de usuario actualizados.');
+          }else{
+            return redirect('/ActualizarUser')->with('infoRed','Diligencie bien el formato.');
+          }
     }
-
-
-
 }

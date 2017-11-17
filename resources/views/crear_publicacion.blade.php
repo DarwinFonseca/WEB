@@ -4,28 +4,28 @@
 //Redireccionado al index
 @else
 @endguest
-<?php
-$id=Auth::user()->id;
-?>
 @section('content')
 <head>
   <title>Crear Bien</title>
 </head>
-<body>
-  <div class="container">
-    <div class="uk-container uk-container-center uk-text-center">
-      <br>
-      <h1>Crear publicación</h1>
-      <div class="uk-vertical-align-middle" style="width: 600px;">
-        <form class="uk-form uk-panel uk-panel-box" action="{{ url('/CrearPublicacion') }}" method="POST"> {{csrf_field()}}
+<div class="container">
+  <a href="{{URL('home')}}"><button value="Volver" class="btn">Volver</button></a>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Crear Publicación</div>
+      <div class="panel-body" >
+        <form class="form-horizontal" action="{{ url('/CrearPublicacion') }}" method="POST"> {{csrf_field()}}
           <br><label class="uk-form-label uk-h3 uk-align-left">Link:</label> <br />
-          <br><input required class="uk-width-1-1 uk-form-large" type="text" name="link" id="link" placeholder="www.example.com" />
+          <br><input required class="form-control" type="text" name="link" id="link" placeholder="www.example.com" />
           <br><br><label class="uk-form-label uk-h3 uk-align-left">Descripción:</label> <br />
-          <br><textarea required class="uk-width-1-1 uk-form-large" type="text" name="descripcion" id="descripcion" placeholder="Ejemplo: Introducción a la ingeniería social"  rows="4" cols="49"></textarea>
-          <br><br><button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit" value="Crear Publicacion"  id="btnCrearPublicacion" name="btnCrearPublicacion" >Crear Publicacion</button>
+          <br><textarea required class="form-control" type="text" name="descripcion" id="descripcion" placeholder="Ejemplo: Introducción a la ingeniería social"  rows="4" cols="49"></textarea>
+          <br><br>
+          <button type="submit" class="btn btn-primary"value="Crear Publicacion"  id="btnCrearPublicacion" name="btnCrearPublicacion" >Crear Publicacion</button>
         </form>
       </div>
-    <br><br><a href="{{URL('home')}}"><button value="Volver" class="uk-grid-width-1-2 uk-button uk-button-danger uk-button-large">Volver</button></a></p>
+    <br><br>
     </div>
-  </body>
+
+
   @endsection
