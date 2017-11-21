@@ -44,8 +44,9 @@
                     <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->descripcion  }} </a></td>
                     <td>{{$publicacion->name}}</td>
                     <td><a class="glyphicon glyphicon-thumbs-up" href='{{url("/ValidarVoto/{$publicacion->id_publicacion}")}}'/> {{$publicacion->votos}}</td>
-                    <td><a class="glyphicon glyphicon-comment" href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td></tr>
-                  </tr>
+                      <!--td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td  DISQUS-->
+                      <td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> Comentar</td>
+                    </tr>
                   @endforeach
                   @else
                     @guest

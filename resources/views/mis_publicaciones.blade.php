@@ -44,7 +44,8 @@
                     <td>{{ $publicacion->descripcion  }}</td>
                     <td><a href=http:\\{{$publicacion->link}} target='_blank'> {{ $publicacion->link  }}</a></td>
                     <td><a class='glyphicon glyphicon-thumbs-up' /> {{$publicacion->votos}}</td>
-                    <td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td>
+                    <!--td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> {{$publicacion->comentarios}}</td  DISQUS-->
+                    <td><a class='glyphicon glyphicon-comment' href='{{url("/Comentarios/{$publicacion->id_publicacion}")}}'/> Comentar</td>
                     <td><a href='{{url("/CambiarEstado/{$publicacion->estado}/{$publicacion->id_publicacion}")}}'>{{ $publicacion->estado  }}</a></td>
                     <td><a href='{{url("/EliminarPublicacion/{$publicacion->id_publicacion}")}}' class='label label-danger'>Eliminar</a></td>
                   </tr>
