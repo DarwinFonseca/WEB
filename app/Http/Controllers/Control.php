@@ -215,6 +215,8 @@ class Control extends Controller
       ->where('comentarios.id_publicacion', 'like', $id_publicacion)
       ->get();
 
+//      return response()->json($MisPubs);
+      //echo DD(json_decode($MisPubs));
       return view('comentarios', ['Mostrar'  => $Mostrar], ['MisPubs' => $MisPubs]);
     }
 
@@ -248,7 +250,6 @@ class Control extends Controller
 
       if ($request->password==$request->password_confirmation) {
         $validatedData = $request->validate([
-        'email' => 'unique',
         'password' => 'required|min:6',
         'password_confirmation' => 'required',
       ]);
