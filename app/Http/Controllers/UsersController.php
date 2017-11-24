@@ -69,7 +69,8 @@ class UsersController extends Controller
      *
      * La funcion regresa un JSON que con el reporte y el codigo del estado
      *
-     **/    public function destroy($id_user){
+     **/
+     public function destroy(Request $request){
       try {
         $user = User::find($id_user);
         if (!$user) {
@@ -83,6 +84,33 @@ class UsersController extends Controller
           return response('Error al eliminar, intente de nuevo',500);
       }
     }
+
+    /**
+     * La funcion "update" sobre-escribe los datos de un usuario recibiendo los parametros en un 'Request'
+     *
+     * La funcion regresa un JSON que con el reporte y el codigo del estado
+     **/
+    public function update(Request $request){
+     try {
+       $user = User::find($request->input('id'));
+       if (!$user) {
+         # code...
+         return response()->json(['No existe un usuario con ese ID'], 404);
+       }
+
+       $user->name = $request->input('name');
+       $user->email= $request->input('email');
+       $user->password=bcrypt($request->input('password'));
+       $user->save();
+       return response()->json("Valores del usuario actualizados",200);
+     } catch (\Exception $e) {
+         Log::critical("No se encontro el usuario: {$e->getCode()} , {$e->getLine()} , {$e->getMessage()} ");
+         return response('Error al intentar actualizar, intente de nuevo',409);
+     }
+    }
+
+
+
 
     /**
      * La funcion ActualizarUser sobre-escribe los datos de un usuario recibiendo los parametros en un 'Request'
