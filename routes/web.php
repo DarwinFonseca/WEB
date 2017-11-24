@@ -27,19 +27,17 @@ Route::get('/ActualizarUser', function () {
 
 Auth::routes();
 
+Route::get('/', 'Control@home')->name('home');
 Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/index', 'Control@home')->name('home');
 Route::get('/home', 'Control@home')->name('home');
 
-Route::get('/', 'Control@home')->name('home');
-
-
-Route::post('/ActualizarUser', 'Control@ActualizarUser');
-Route::post('/CrearPublicacion', 'Control@CrearPublicacion');
-Route::get('/mis_publicaciones', 'Control@ConsutarMisPublicaciones');
-Route::get('/CambiarEstado/{estado}/{id_publicacion}', 'Control@CambiarEstado');
-Route::get('/EliminarPublicacion/{id_publicacion}', 'Control@EliminarPublicacion');
-Route::get('/ValidarVoto/{id_publicacion}', 'Control@ValidarVoto');
-Route::get('/Comentarios/{id_publicacion}', 'Control@PublicacionAComentar');
-Route::post('/SubirComentario', 'Control@SubirComentario');
+Route::post('/ActualizarUser', 'UsersController@ActualizarUser')->name('Actualizar Usuario');
+Route::post('/CrearPublicacion', 'PublicationController@CrearPublicacion')->name('Crear Publicacion');
+Route::get('/mis_publicaciones', 'PublicationController@ConsutarMisPublicaciones')->name('Mis Publicaciones');
+Route::get('/CambiarEstado/{estado}/{id_publicacion}', 'PublicationController@CambiarEstado')->name('Mis Publicaciones');
+Route::get('/EliminarPublicacion/{id_publicacion}', 'PublicationController@EliminarPublicacion')->name('Mis Publicaciones');
+Route::get('/ValidarVoto/{id_publicacion}', 'VotesController@ValidarVoto')->name('Votos');
+Route::get('/Comentarios/{id_publicacion}', 'CommentController@PublicacionAComentar')->name('Comentarios');
+Route::post('/SubirComentario', 'CommentController@SubirComentario')->name('Comentarios');
