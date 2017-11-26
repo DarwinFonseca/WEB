@@ -13,7 +13,7 @@ use App\comentarios;
 use App\publicaciones;
 use App\publicacionesxusuario;
 
-class CommentController extends Controller
+class CommentsController extends Controller
 {
   /**
    * La función "PublicacionAComentar" recibe el ID de la publicación en la cuál se va a comentar

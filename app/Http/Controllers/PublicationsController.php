@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use Auth;
 use App\votos;
+use App\User;
 use App\comentarios;
 use App\publicaciones;
 use App\publicacionesxusuario;
 
-class PublicationController extends Controller
+class PublicationsController extends Controller
 {
     public function PublicacionUsuario($id){
 
@@ -106,5 +108,68 @@ class PublicationController extends Controller
       $query = DB::update('delete from comentarios where id_publicacion='.$id_publicacion);
       return redirect('/mis_publicaciones')->with('info','La publicación # '.$id_publicacion.' se eliminó correctamente.');
     }
+
+
+    public function index(Request $request){
+      $publicaciones = publicaciones::all()->toArray();
+      return response()->json($publicaciones);
+    }
+
+    public function show($id_publicacion){
+      try {
+
+        $publicacion=publicaciones::all()->where('id_publicacion', '=', $id_publicacion);
+
+        if (!$publicacion) {
+          # code...
+          return response()->json(['No existe un publicacion con ese ID'], 404);
+        }
+        return response()->json($publicacion,200);
+      } catch (\Exception $e) {
+          return response(
+            "No se encontro el publicacion: {$e->getCode()} , {$e->getLine()} , {$e->getMessage()} "
+
+          );
+      }
+    }
+
+    public function store(Request $request){
+
+      try{
+        $this->validate($request, [
+          'link' => 'required',
+          'descripcion' => 'required'
+        ]);
+
+        $publicado = new publicaciones;
+        $publicado->link = $request->input('link');
+        $publicado->descripcion = $request->input('descripcion');
+        $publicado->votos = 0;
+        $publicado->comentarios = 0;
+        $publicado->estado = 'activo';
+        $publicado->save();
+        Log::info('Usuario almacenado');
+
+        return response()->json(['status'=>true, 'Exito al almacenar'], 200);
+      }catch (\Exception $e){
+        Log::critical("No se pudo almacenar el usuario: {$e->getCode()} , {$e->getLine()} , {$e->getMessage()} ");
+        return response('Error al almacenar', 500);
+      }
+    }
+
+    public function ConsutarPublicacion($id_user){
+      try {
+        $MisPubs=publicacionesxusuario::all()->where('id_user', '=', $id_user);
+        if (!$MisPubs) {
+          return response()->json(['No existe un publicacion con ese ID'], 404);
+        }
+        return response()->json($MisPubs,200);
+      } catch (\Exception $e) {
+          return response(
+            "No se encontro el publicacion: {$e->getCode()} , {$e->getLine()} , {$e->getMessage()} "
+          );
+      }
+    }
+
 
 }
